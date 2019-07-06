@@ -8,7 +8,6 @@ public class LoginController {
 
     @RequestMapping("/test")
     public String login(){
-        //这是一个测试拦截用的controller 可删掉
         return "index";
     }
 }
