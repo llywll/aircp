@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.obor.aircp.mapper.HRecMapper">
+  <resultMap id="BaseResultMap" type="com.obor.aircp.model.HRec">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="city_rec_name" jdbcType="VARCHAR" property="cityRecName" />
+    <result column="city_rec_context" jdbcType="VARCHAR" property="cityRecContext" />
+    <result column="city_comment" jdbcType="VARCHAR" property="cityComment" />
+    <result column="city_id" jdbcType="VARCHAR" property="cityId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, city_rec_name, city_rec_context, city_comment, city_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from h_rec
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from h_rec
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.obor.aircp.model.HRec" useGeneratedKeys="true">
+    insert into h_rec (city_rec_name, city_rec_context, city_comment, 
+      city_id)
+    values (#{cityRecName,jdbcType=VARCHAR}, #{cityRecContext,jdbcType=VARCHAR}, #{cityComment,jdbcType=VARCHAR}, 
+      #{cityId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.obor.aircp.model.HRec" useGeneratedKeys="true">
+    insert into h_rec
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cityRecName != null">
+        city_rec_name,
+      </if>
+      <if test="cityRecContext != null">
+        city_rec_context,
+      </if>
+      <if test="cityComment != null">
+        city_comment,
+      </if>
+      <if test="cityId != null">
+        city_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cityRecName != null">
+        #{cityRecName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityRecContext != null">
+        #{cityRecContext,jdbcType=VARCHAR},
+      </if>
+      <if test="cityComment != null">
+        #{cityComment,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null">
+        #{cityId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.obor.aircp.model.HRec">
+    update h_rec
+    <set>
+      <if test="cityRecName != null">
+        city_rec_name = #{cityRecName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityRecContext != null">
+        city_rec_context = #{cityRecContext,jdbcType=VARCHAR},
+      </if>
+      <if test="cityComment != null">
+        city_comment = #{cityComment,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null">
+        city_id = #{cityId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.obor.aircp.model.HRec">
+    update h_rec
+    set city_rec_name = #{cityRecName,jdbcType=VARCHAR},
+      city_rec_context = #{cityRecContext,jdbcType=VARCHAR},
+      city_comment = #{cityComment,jdbcType=VARCHAR},
+      city_id = #{cityId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

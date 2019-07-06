@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.obor.aircp.mapper.HServiceMapper">
+  <resultMap id="BaseResultMap" type="com.obor.aircp.model.HService">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="service_name" jdbcType="VARCHAR" property="serviceName" />
+    <result column="service_info" jdbcType="VARCHAR" property="serviceInfo" />
+    <result column="service_money" jdbcType="VARCHAR" property="serviceMoney" />
+    <result column="service_type" jdbcType="VARCHAR" property="serviceType" />
+    <result column="hotel_id" jdbcType="VARCHAR" property="hotelId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, service_name, service_info, service_money, service_type, hotel_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from h_service
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from h_service
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.obor.aircp.model.HService" useGeneratedKeys="true">
+    insert into h_service (service_name, service_info, service_money, 
+      service_type, hotel_id)
+    values (#{serviceName,jdbcType=VARCHAR}, #{serviceInfo,jdbcType=VARCHAR}, #{serviceMoney,jdbcType=VARCHAR}, 
+      #{serviceType,jdbcType=VARCHAR}, #{hotelId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.obor.aircp.model.HService" useGeneratedKeys="true">
+    insert into h_service
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="serviceName != null">
+        service_name,
+      </if>
+      <if test="serviceInfo != null">
+        service_info,
+      </if>
+      <if test="serviceMoney != null">
+        service_money,
+      </if>
+      <if test="serviceType != null">
+        service_type,
+      </if>
+      <if test="hotelId != null">
+        hotel_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="serviceName != null">
+        #{serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceInfo != null">
+        #{serviceInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceMoney != null">
+        #{serviceMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceType != null">
+        #{serviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelId != null">
+        #{hotelId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.obor.aircp.model.HService">
+    update h_service
+    <set>
+      <if test="serviceName != null">
+        service_name = #{serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceInfo != null">
+        service_info = #{serviceInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceMoney != null">
+        service_money = #{serviceMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceType != null">
+        service_type = #{serviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelId != null">
+        hotel_id = #{hotelId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.obor.aircp.model.HService">
+    update h_service
+    set service_name = #{serviceName,jdbcType=VARCHAR},
+      service_info = #{serviceInfo,jdbcType=VARCHAR},
+      service_money = #{serviceMoney,jdbcType=VARCHAR},
+      service_type = #{serviceType,jdbcType=VARCHAR},
+      hotel_id = #{hotelId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

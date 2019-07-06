@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.obor.aircp.mapper.HCityMapper">
+  <resultMap id="BaseResultMap" type="com.obor.aircp.model.HCity">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="city_name" jdbcType="VARCHAR" property="cityName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, city_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from h_city
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from h_city
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.obor.aircp.model.HCity" useGeneratedKeys="true">
+    insert into h_city (city_name)
+    values (#{cityName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.obor.aircp.model.HCity" useGeneratedKeys="true">
+    insert into h_city
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cityName != null">
+        city_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cityName != null">
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.obor.aircp.model.HCity">
+    update h_city
+    <set>
+      <if test="cityName != null">
+        city_name = #{cityName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.obor.aircp.model.HCity">
+    update h_city
+    set city_name = #{cityName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

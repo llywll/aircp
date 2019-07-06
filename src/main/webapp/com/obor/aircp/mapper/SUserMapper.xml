@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.obor.aircp.mapper.SUserMapper">
+  <resultMap id="BaseResultMap" type="com.obor.aircp.model.SUser">
+    <id column="s_id" jdbcType="VARCHAR" property="sId" />
+    <result column="s_user_name" jdbcType="VARCHAR" property="sUserName" />
+    <result column="s_password" jdbcType="VARCHAR" property="sPassword" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    s_id, s_user_name, s_password
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from s_user
+    where s_id = #{sId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from s_user
+    where s_id = #{sId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="s_id" keyProperty="sId" parameterType="com.obor.aircp.model.SUser" useGeneratedKeys="true">
+    insert into s_user (s_user_name, s_password)
+    values (#{sUserName,jdbcType=VARCHAR}, #{sPassword,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="s_id" keyProperty="sId" parameterType="com.obor.aircp.model.SUser" useGeneratedKeys="true">
+    insert into s_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sUserName != null">
+        s_user_name,
+      </if>
+      <if test="sPassword != null">
+        s_password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sUserName != null">
+        #{sUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="sPassword != null">
+        #{sPassword,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.obor.aircp.model.SUser">
+    update s_user
+    <set>
+      <if test="sUserName != null">
+        s_user_name = #{sUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="sPassword != null">
+        s_password = #{sPassword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where s_id = #{sId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.obor.aircp.model.SUser">
+    update s_user
+    set s_user_name = #{sUserName,jdbcType=VARCHAR},
+      s_password = #{sPassword,jdbcType=VARCHAR}
+    where s_id = #{sId,jdbcType=VARCHAR}
+  </update>
+</mapper>
