@@ -1,6 +1,7 @@
 package com.obor.aircp.mapper;
 
 import com.obor.aircp.model.PUser;
+import org.apache.ibatis.annotations.Param;
 
 public interface PUserMapper {
     int deleteByPrimaryKey(String id);
@@ -10,6 +11,8 @@ public interface PUserMapper {
     int insertSelective(PUser record);
 
     PUser selectByPrimaryKey(String id);
+
+    PUser selectByUserNameAndPassword(@Param("userName")String userName, @Param("password")String password);
 
     int updateByPrimaryKeySelective(PUser record);
 

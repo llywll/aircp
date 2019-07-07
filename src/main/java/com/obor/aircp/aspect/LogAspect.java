@@ -53,7 +53,6 @@ public class LogAspect {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         HttpServletResponse response = attributes.getResponse();
-        System.out.println("jjjjjj");
         try {
             long start = new Date().getTime();
             logger.info("|-------------------------------请求拦截："+new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.ms").format(start)+"-------------------------------|");
