@@ -1,5 +1,7 @@
 package com.obor.aircp.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -36,11 +38,14 @@ public class HOrder implements Serializable {
     /**
      * 订单开始日期
      */
+
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date startDate;
 
     /**
      * 订单结束日期
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date endDate;
 
     /**

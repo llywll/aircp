@@ -1,5 +1,7 @@
 package com.obor.aircp.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -31,6 +33,7 @@ public class PUser implements Serializable {
     /**
      * 用户出生日期
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date birthdate;
 
     /**
