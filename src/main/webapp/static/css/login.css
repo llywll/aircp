@@ -1,0 +1,325 @@
+@font-face {
+    font-family: '凉岛';
+    src: url('../fonts/ld_wydh.TTF');
+}
+
+@font-face {
+    font-family: '苹方Bold';
+    src: url('../fonts/pingFangBold.ttf');
+}
+
+@font-face {
+    font-family: '苹方Light';
+    src: url('../fonts/pingFangLight.ttf');
+}
+
+@font-face {
+    font-family: '苹方Heavy';
+    src: url('../fonts/pingFangHeavy.ttf');
+}
+
+@font-face {
+    font-family: '苹方Regular';
+    src: url('../fonts/pingFangRegular.ttf');
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+}
+
+.login_box {
+    user-select: none;
+    position: relative;
+    width: 400px;
+    background: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease-in-out;
+}
+
+.dark_style {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+@supports(-webkit-backdrop-filter: blur(30px)) {
+    .login_box {
+        /*background: rgba(255, 255, 255, 0.4);*/
+        background: rgba(0, 0, 0, 0.4);
+        -webkit-backdrop-filter: blur(25px);
+    }
+}
+
+.aci {
+    display: flex;
+    flex-direction: column;
+}
+
+.isShow {
+    right: 0;
+    opacity: 1;
+}
+
+.isHidden {
+    right: -40%;
+    opacity: 0;
+}
+
+.title_box {
+    text-align: left;
+    margin-left: 50px;
+    font-family: '苹方Light';
+    color: black;
+    position: relative;
+    bottom: -25px
+}
+
+.dark_style .title_box {
+    color: white;
+}
+
+.input_mod {
+    font-family: '苹方Light';
+    border-bottom: 1px solid rgba(0, 0, 0, 0.459);
+    position: relative;
+    width: 65%;
+    margin: 10px auto;
+    padding: 3% 2% 0 2%;
+    transition: all 0.2s ease-in-out;
+    /*border-radius: 5px;*/
+}
+.message_box{
+    display: none;
+    position: absolute;
+    margin-left: 65px;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.error_me_box{
+    display: flex;
+}
+.message_box .ms_lab{
+    color: #ff4c5f;
+}
+.error_me_box .im-warning-circle{
+    display: block;
+}
+
+.dark_style .input_mod {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.459);
+}
+
+.label_text {
+    font-family: '苹方Heavy';
+    position: absolute;
+    pointer-events: none;
+    top: calc(50% - 8px);
+    left: 3%;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.405);
+    transition: all 0.2s linear;
+}
+
+.im-warning-circle {
+    font-size: 15px;
+    color: red;
+    margin-right: 2px;
+    display: none;
+    line-height: 26px;
+}
+
+.dark_style .label_text {
+    color: rgba(255, 255, 255, 0.705);
+}
+
+.error_label {
+    color: red;
+    font-family: '苹方Light'
+}
+
+.warring_label {
+    color: yellow;
+}
+
+.input_mod input {
+    width: 96%;
+    outline: none;
+    height: 28px;
+    outline: none;
+    font-size: 16px;
+    background: none;
+    border: none;
+    color: black;
+    caret-color: #000;
+}
+
+.dark_style .input_mod input {
+    color: white;
+    caret-color: white;
+}
+
+.input_mod input::selection {
+    color: white;
+    background: rgba(0, 0, 0, 1);
+}
+
+.dark_style .input_mod input::selection {
+    color: rgba(0, 0, 0, 1);
+    background: white;
+}
+
+.name_box_focus {
+    box-shadow: 0 25px 30px -18px rgba(0, 0, 0, 0.671);
+}
+
+.error_box {
+    border-bottom: 1px solid red;
+    border-radius: 3px;
+}
+
+.error_box input {
+    color: red;
+}
+
+.label_focus {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.505);
+    top: 0%;
+}
+
+.submit_box {
+    border: none;
+    width: 68%;
+    margin-top: 30px;
+    padding-right: 0%;
+    padding-left: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.submit_box button {
+    font-family: '苹方Light';
+    font-size: 18px;
+    background: none;
+    border-radius: 3px;
+    border: none;
+    border: 1px solid rgba(0, 0, 0, 0.459);
+    color: #000;
+    /*border:1px solid rgba(255, 255, 255,0.459);*/
+    width: 100%;
+    padding: 3.5% 2%;
+    cursor: pointer;
+    outline-style: none;
+    transition: all 0.5s ease-in-out;
+}
+
+.dark_style .submit_box button {
+    border: 1px solid rgba(255, 255, 255, 0.459);
+    color: white;
+}
+
+.submit_box button:hover {
+    background: rgba(0, 0, 0, 0.85);
+    color: rgba(255, 255, 255);
+    box-shadow: 0 9px 30px rgba(0, 0, 0, 0.671);
+}
+
+.dark_style .submit_box button:hover {
+    background: white;
+    color: black;
+}
+
+.foter_text {
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    bottom: 0;
+    border: none;
+}
+
+.dark_style .foter_text {
+    color: white;
+}
+
+.login_loading button {
+    position: relative;
+    pointer-events: none;
+    border: 1px solid rgba(0, 0, 0, 1);
+    border-bottom: none;
+    animation: hash 0.5s linear forwards, xuanzhuan 0.7s 0.5s linear forwards infinite;
+}
+
+.dark_style .login_loading button {
+    border: 1px solid rgba(255, 255, 255);
+}
+
+.ac {
+    position: absolute;
+    pointer-events: none;
+}
+
+.dark_style .ac {
+    color: white;
+}
+
+@keyframes hash {
+    0% {
+        width: 100%;
+        height: 70px;
+        padding: 3.5% 2%;
+        border-radius: 100px;
+    }
+    25% {
+        width: 50%;
+        height: 70px;
+        padding: 3.5% 2%;
+        border-radius: 100px;
+    }
+    50% {
+        width: 70px;
+        height: 70px;
+        padding: 3.5% 2%;
+        border-radius: 50%;
+    }
+    75% {
+        width: 70px;
+        height: 70px;
+        padding: 3.5% 2%;
+        border-radius: 70%;
+    }
+    100% {
+        width: 70px;
+        height: 70px;
+        padding: 0;
+        border-radius: 100%;
+    }
+}
+
+@keyframes xuanzhuan {
+    0% {
+        transform: rotateZ(0deg);
+    }
+    100% {
+        transform: rotateZ(360deg);
+    }
+}
+
+
+/**************/
+
+.titleBar {
+    width: 100%;
+    height: 30px;
+    z-index: 99;
+    position: fixed;
+    top: 0;
+    left: 0;
+    -webkit-app-region: drag;
+}
