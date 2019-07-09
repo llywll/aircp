@@ -1,7 +1,6 @@
 package com.obor.aircp.base;
 
-import com.obor.aircp.service.HOrderService;
-import com.obor.aircp.service.SUserService;
+import com.obor.aircp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Collection;
@@ -17,6 +16,24 @@ public class BaseController {
 
     @Autowired
     protected HOrderService hOrderService;
+
+    @Autowired
+    protected HRecService hRecService;
+
+    @Autowired
+    protected HCityService hCityService;
+
+    @Autowired
+    protected HHotelService hHotelService;
+
+    @Autowired
+    protected PUserService pUserService;
+
+    @Autowired
+    protected HSerService hSerService;
+
+    @Autowired
+    protected HCommentService hCommentService;
 
     protected Map<String, Object> result (String state, String message){
         Map<String, Object> map = new HashMap<>();

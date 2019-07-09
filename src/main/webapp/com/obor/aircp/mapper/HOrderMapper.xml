@@ -34,17 +34,17 @@
         from h_order
         order by
         <choose>
-            <when test="isStart == t">
+            <when test="isStart == 'true'.toString()">
                 start_date
             </when>
             <otherwise>
                 end_date
             </otherwise>
         </choose>
-        <if test="isDesc == t">
+        <if test="isDesc == 'true'.toString()">
             DESC
         </if>
-        limit #{pstart,jdbcType=VARCHAR},#{psize,jdbcType=VARCHAR}
+        limit #{pstart,jdbcType=INTEGER},#{psize,jdbcType=INTEGER}
     </select>
     <select id="selectAll" resultMap="BaseResultMap">
         select

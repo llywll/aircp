@@ -14,13 +14,13 @@ public class HHotelServiceImpl extends BaseService implements HHotelService {
     }
 
     @Override
-    public int insert(HHotel hHotel) {
+    public int add(HHotel hHotel) {
         hHotel.setId(UUID.randomUUID().toString().replace("-",""));
         return hHotelMapper.insertSelective(hHotel);
     }
 
     @Override
-    public HHotel selectById(String id) {
+    public HHotel getById(String id) {
         return hHotelMapper.selectByPrimaryKey(id);
     }
 
@@ -30,12 +30,17 @@ public class HHotelServiceImpl extends BaseService implements HHotelService {
     }
 
     @Override
-    public List<HHotel> selectByPage(int pstart, int psize) {
+    public List<HHotel> getByPage(int pstart, int psize) {
         return hHotelMapper.selectByPage(pstart,psize);
     }
 
     @Override
     public int update(HHotel hHotel) {
         return hHotelMapper.updateByPrimaryKeySelective(hHotel);
+    }
+
+    @Override
+    public int getCount() {
+        return hHotelMapper.getCount();
     }
 }

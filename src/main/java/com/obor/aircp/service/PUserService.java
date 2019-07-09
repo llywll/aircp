@@ -15,7 +15,9 @@ public interface PUserService {
 
     List<PUser> getByPage(int pstart, int psize);
 
-    PUser getByUserNameAndPassword(String userName, String password);
+    PUser login(String userName, String password);
 
     int update(PUser pUser);
+
+    int getCount();
 }

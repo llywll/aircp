@@ -17,7 +17,7 @@ public interface HOrderMapper {
     List<HOrder> selectByPage(@Param("pstart") Integer pstart, @Param("psize") Integer psize);
 
     List<HOrder> selectByPageTheSorting(@Param("isStart") String isStart, @Param("isDesc") String isDesc,
-                                        @Param("pstart") String pstart, @Param("psize") String psize);
+                                        @Param("pstart") Integer pstart, @Param("psize") Integer psize);
 
     List<HOrder> selectAll();
 

@@ -5,15 +5,12 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
-       xmlns:cache="http://www.springframework.org/schema/cache"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://mybatis.org/schema/mybatis-spring
                            http://mybatis.org/schema/mybatis-spring.xsd
                            http://www.springframework.org/schema/mvc
                            http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
-                           http://www.springframework.org/schema/cache
-                           http://www.springframework.org/schema/cache/spring-cache-4.3.xsd
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context-4.3.xsd">
     <!-- mvc开启注解 -->
@@ -113,5 +110,9 @@
     <bean id="sUserService" class="com.obor.aircp.service.impl.SUserServiceImpl"/>
     <bean id="hOrderService" class="com.obor.aircp.service.impl.HOrderServiceImpl" />
     <bean id="hCommentService" class="com.obor.aircp.service.impl.HCommentServiceImpl" />
+    <bean id="hSerService" class="com.obor.aircp.service.impl.HSerServiceImpl"/>
     <bean id="hCityService" class="com.obor.aircp.service.impl.HCityServiceImpl"/>
+    <bean id="pUserService" class="com.obor.aircp.service.impl.PUserServiceImpl"/>
+    <bean id="hHotelService" class="com.obor.aircp.service.impl.HHotelServiceImpl"/>
+    <bean id="hRecService" class="com.obor.aircp.service.impl.HRecServiceImpl"/>
 </beans>

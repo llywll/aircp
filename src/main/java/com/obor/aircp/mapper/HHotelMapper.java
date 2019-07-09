@@ -21,4 +21,6 @@ public interface HHotelMapper {
     int updateByPrimaryKeySelective(HHotel record);
 
     int updateByPrimaryKey(HHotel record);
+
+    int getCount();
 }

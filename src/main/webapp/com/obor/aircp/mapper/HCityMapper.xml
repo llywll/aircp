@@ -66,4 +66,7 @@
     set city_name = #{cityName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <select id="getCount" resultType="java.lang.Integer">
+    select count(id) from h_city
+  </select>
 </mapper>

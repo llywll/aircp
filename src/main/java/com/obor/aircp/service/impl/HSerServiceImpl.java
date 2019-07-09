@@ -14,7 +14,7 @@ public class HSerServiceImpl extends BaseService implements HSerService {
     }
 
     @Override
-    public int insert(HService hService) {
+    public int add(HService hService) {
         hService.setId(UUID.randomUUID().toString().replace("-",""));
         return hServiceMapper.insertSelective(hService);
     }
@@ -37,5 +37,10 @@ public class HSerServiceImpl extends BaseService implements HSerService {
     @Override
     public int update(HService hService) {
         return hServiceMapper.updateByPrimaryKeySelective(hService);
+    }
+
+    @Override
+    public int getCount() {
+        return hServiceMapper.getCount();
     }
 }

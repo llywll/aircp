@@ -8,7 +8,7 @@ import java.util.List;
 public interface HCityService {
     int deleteById(String id);
 
-    int insert(HCity hCity);
+    int add(HCity hCity);
 
     HCity getById(String id);
 
@@ -17,4 +17,6 @@ public interface HCityService {
     List<HCity> selectByPage(int pstart, int psize);
 
     int updateById(HCity hCity);
+
+    int getCount();
 }

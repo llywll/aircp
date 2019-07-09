@@ -29,12 +29,13 @@ public class HOrderController extends BaseController {
     @RequestMapping("getByPageTS")
     @ResponseBody
     public Map getByPageTheSorting(
-            @RequestParam(value = "isStart", defaultValue = "t") String isStart,
-            @RequestParam(value = "isDesc", defaultValue = "f") String isDesc,
+            @RequestParam(value = "isStart", defaultValue = "true") String isStart,
+            @RequestParam(value = "isDesc", defaultValue = "false") String isDesc,
             @RequestParam(value = "pno", defaultValue = "1") int pno,
             @RequestParam(value = "psize", defaultValue = "10") int psize) {
-        List<HOrder> list = hOrderService.selectByPageTheSorting(isStart,isDesc,String.valueOf((pno - 1) * psize), String.valueOf(psize));
+        List<HOrder> list = hOrderService.selectByPageTheSorting(isStart,isDesc,(pno - 1) * psize, psize);
         return result(list, hOrderService.getCount(), "");
+
     }
 
     @RequestMapping("getAll")
@@ -69,5 +70,10 @@ public class HOrderController extends BaseController {
         return result(ERROR, "更新失败");
     }
 
-
+    @RequestMapping("addOrder")
+    public Map addOrder(@ModelAttribute("HOrder") HOrder hOrder) {
+        if (hOrderService.addOrderInfo(hOrder) > 0)
+            return result(SUCCESS, "新增成功");
+        return result(ERROR, "新增失败");
+    }
 }

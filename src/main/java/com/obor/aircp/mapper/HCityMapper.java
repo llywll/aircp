@@ -21,4 +21,6 @@ public interface HCityMapper {
     int updateByPrimaryKeySelective(HCity record);
 
     int updateByPrimaryKey(HCity record);
+
+    int getCount();
 }

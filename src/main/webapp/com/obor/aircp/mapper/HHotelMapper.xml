@@ -103,4 +103,7 @@
       hotel_site_id = #{hotelSiteId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+    <select id="getCount" resultType="java.lang.Integer">
+    select count(id) from h_hotel
+  </select>
 </mapper>

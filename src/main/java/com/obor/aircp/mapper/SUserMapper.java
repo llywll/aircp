@@ -18,4 +18,6 @@ public interface SUserMapper {
     int updateByPrimaryKeySelective(SUser record);
 
     int updateByPrimaryKey(SUser record);
+
+    int getCount();
 }

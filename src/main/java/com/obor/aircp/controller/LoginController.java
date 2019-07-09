@@ -23,7 +23,7 @@ public class LoginController extends BaseController {
             SUser sUser = sUserService.login(userName, password);
             if (sUser != null) {
                 request.getSession().setAttribute("user", sUser);
-                return result(SUCCESS,"成功登陆");
+                return result(SUCCESS,"成功登录");
             }else {
                 return result(ERROR,"账户名或密码错误");
             }

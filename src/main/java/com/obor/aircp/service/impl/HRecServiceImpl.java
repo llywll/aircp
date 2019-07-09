@@ -14,13 +14,13 @@ public class HRecServiceImpl extends BaseService implements HRecService {
     }
 
     @Override
-    public int insert(HRec hRec) {
+    public int add(HRec hRec) {
         hRec.setId(UUID.randomUUID().toString().replace("-",""));
         return hRecMapper.insertSelective(hRec);
     }
 
     @Override
-    public HRec selectById(String id) {
+    public HRec getById(String id) {
         return hRecMapper.selectByPrimaryKey(id);
     }
 
@@ -37,5 +37,10 @@ public class HRecServiceImpl extends BaseService implements HRecService {
     @Override
     public int update(HRec hRec) {
         return hRecMapper.updateByPrimaryKeySelective(hRec);
+    }
+
+    @Override
+    public int getCount() {
+        return hRecMapper.getCount();
     }
 }

@@ -15,7 +15,7 @@ public class HCityServiceImpl extends BaseService implements HCityService {
     }
 
     @Override
-    public int insert(HCity hCity) {
+    public int add(HCity hCity) {
         hCity.setId(UUID.randomUUID().toString().replace("-",""));
         return hCityMapper.insertSelective(hCity);
     }
@@ -38,5 +38,10 @@ public class HCityServiceImpl extends BaseService implements HCityService {
     @Override
     public int updateById(HCity hCity) {
         return hCityMapper.updateByPrimaryKeySelective(hCity);
+    }
+
+    @Override
+    public int getCount() {
+        return hCityMapper.getCount();
     }
 }

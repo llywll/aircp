@@ -6,4 +6,6 @@ public interface SUserService {
     SUser login(String userName, String password);
 
     int register(SUser sUser);
+
+    int getCount();
 }

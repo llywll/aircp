@@ -66,4 +66,8 @@
       s_password = #{sPassword,jdbcType=VARCHAR}
     where s_id = #{sId,jdbcType=VARCHAR}
   </update>
+
+  <select id="getCount" resultType="java.lang.Integer">
+    select count(id) from s_user
+  </select>
 </mapper>

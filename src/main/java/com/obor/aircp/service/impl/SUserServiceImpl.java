@@ -17,4 +17,9 @@ public class SUserServiceImpl extends BaseService implements SUserService {
         sUser.setsId(UUID.randomUUID().toString().replace("-",""));
         return 0;
     }
+
+    @Override
+    public int getCount() {
+        return sUserMapper.getCount();
+    }
 }

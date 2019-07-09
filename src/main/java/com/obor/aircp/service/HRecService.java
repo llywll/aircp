@@ -8,13 +8,15 @@ import java.util.List;
 public interface HRecService {
     int deleteById(String id);
 
-    int insert(HRec hRec);
+    int add(HRec hRec);
 
-    HRec selectById(String id);
+    HRec getById(String id);
 
     List<HRec> getAll();
 
     List<HRec> getByPage(int pstart, int psize);
 
     int update(HRec hRec);
+
+    int getCount();
 }

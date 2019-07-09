@@ -21,4 +21,6 @@ public interface HRecMapper {
     int updateByPrimaryKeySelective(HRec record);
 
     int updateByPrimaryKey(HRec record);
+
+    int getCount();
 }

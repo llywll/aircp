@@ -22,4 +22,6 @@ public interface HServiceMapper {
     int updateByPrimaryKeySelective(HService record);
 
     int updateByPrimaryKey(HService record);
+
+    int getCount();
 }

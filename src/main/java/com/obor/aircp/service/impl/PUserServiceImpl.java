@@ -37,12 +37,17 @@ public class PUserServiceImpl extends BaseService implements PUserService {
     }
 
     @Override
-    public PUser getByUserNameAndPassword(String userName, String password) {
+    public PUser login(String userName, String password) {
         return pUserMapper.selectByUserNameAndPassword(userName,password);
     }
 
     @Override
     public int update(PUser pUser) {
         return pUserMapper.updateByPrimaryKeySelective(pUser);
+    }
+
+    @Override
+    public int getCount() {
+        return pUserMapper.getCount();
     }
 }

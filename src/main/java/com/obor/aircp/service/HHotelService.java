@@ -8,13 +8,15 @@ import java.util.List;
 public interface HHotelService {
     int deleteById(String id);
 
-    int insert(HHotel hHotel);
+    int add(HHotel hHotel);
 
-    HHotel selectById(String id);
+    HHotel getById(String id);
 
     List<HHotel> getAll();
 
-    List<HHotel> selectByPage(int pstart, int psize);
+    List<HHotel> getByPage(int pstart, int psize);
 
     int update(HHotel hHotel);
+
+    int getCount();
 }

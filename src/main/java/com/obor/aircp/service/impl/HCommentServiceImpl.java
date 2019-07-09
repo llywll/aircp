@@ -14,7 +14,7 @@ public class HCommentServiceImpl extends BaseService implements HCommentService 
     }
 
     @Override
-    public int insert(HComment hComment) {
+    public int add(HComment hComment) {
         hComment.setId(UUID.randomUUID().toString().replace("-",""));
         return hCommentMapper.insertSelective(hComment);
     }
@@ -35,7 +35,12 @@ public class HCommentServiceImpl extends BaseService implements HCommentService 
     }
 
     @Override
-    public int updateById(HComment hComment) {
-        return updateById(hComment);
+    public int update(HComment hComment) {
+        return hCommentMapper.updateByPrimaryKeySelective(hComment);
+    }
+
+    @Override
+    public int getCount() {
+        return hCommentMapper.getCount();
     }
 }

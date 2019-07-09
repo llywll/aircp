@@ -21,4 +21,6 @@ public interface HCommentMapper {
     int updateByPrimaryKeySelective(HComment record);
 
     int updateByPrimaryKey(HComment record);
+
+    int getCount();
 }

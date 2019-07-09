@@ -7,7 +7,7 @@ import java.util.List;
 public interface HSerService {
     int deleteById(String id);
 
-    int insert(HService hService);
+    int add(HService hService);
 
     HService getById(String id);
 
@@ -17,5 +17,7 @@ public interface HSerService {
 
 
     int update(HService hService);
+
+    int getCount();
 
 }

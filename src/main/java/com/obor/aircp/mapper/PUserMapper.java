@@ -24,4 +24,6 @@ public interface PUserMapper {
     int updateByPrimaryKeySelective(PUser record);
 
     int updateByPrimaryKey(PUser record);
+
+    int getCount();
 }
