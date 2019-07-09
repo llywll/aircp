@@ -30,10 +30,10 @@ public class HOrderController extends BaseController {
     @ResponseBody
     public Map getByPageTheSorting(
             @RequestParam(value = "isStart", defaultValue = "t") String isStart,
-            @RequestParam(value = "isDesc", defaultValue = "s") String isDesc,
+            @RequestParam(value = "isDesc", defaultValue = "f") String isDesc,
             @RequestParam(value = "pno", defaultValue = "1") int pno,
             @RequestParam(value = "psize", defaultValue = "10") int psize) {
-        List<HOrder> list = hOrderService.selectByPageTheSorting(isStart,isDesc,(pno - 1) * psize, psize);
+        List<HOrder> list = hOrderService.selectByPageTheSorting(isStart,isDesc,String.valueOf((pno - 1) * psize), String.valueOf(psize));
         return result(list, hOrderService.getCount(), "");
     }
 

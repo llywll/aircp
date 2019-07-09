@@ -5,12 +5,15 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xmlns:cache="http://www.springframework.org/schema/cache"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://mybatis.org/schema/mybatis-spring
                            http://mybatis.org/schema/mybatis-spring.xsd
                            http://www.springframework.org/schema/mvc
                            http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+                           http://www.springframework.org/schema/cache
+                           http://www.springframework.org/schema/cache/spring-cache-4.3.xsd
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context-4.3.xsd">
     <!-- mvc开启注解 -->
@@ -22,14 +25,21 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
+    <mvc:resources mapping="/**/*.js" location="classpath:/static/"/>
+    <mvc:resources mapping="/**/*.css" location="classpath:/static/"/>
+
     <!-- 拦截器 -->
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <mvc:exclude-mapping path="/**/user/login" />
-            <mvc:exclude-mapping path="/**/user/register" />
-            <mvc:exclude-mapping path="/**/login" />
-            <mvc:exclude-mapping path="/**/exit" />
+            <mvc:exclude-mapping path="/**/user/login"/>
+            <mvc:exclude-mapping path="/**/user/register"/>
+            <mvc:exclude-mapping path="/**/login"/>
+            <mvc:exclude-mapping path="/**/exit"/>
+            <mvc:exclude-mapping path="/**/*.html"/>
+            <mvc:exclude-mapping path="/**/*.js"/>
+            <mvc:exclude-mapping path="/**/*.css"/>
+            <mvc:exclude-mapping path="/**/*.jpg"/>
             <bean class="com.obor.aircp.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
@@ -38,13 +48,13 @@
     <mvc:default-servlet-handler/>
 
     <!-- 扫描 -->
-    <context:component-scan base-package="com.obor.aircp" />
+    <context:component-scan base-package="com.obor.aircp"/>
 
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
     <mybatis:scan base-package="com.obor.aircp.mapper"/>
     <!-- 配置视图解析器-->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/" p:suffix=".jsp"/>
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/" p:suffix=".html"/>
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${jdbc.driver}"/>
@@ -61,15 +71,47 @@
         <constructor-arg ref="dataSource"/>
     </bean>
 
-    <!-- 日志记录，定义增强 -->
-    <!--bean class="com.obor.aircp.aspect.LogAspect"/-->
-
     <!-- 全局错误处理 -->
-    <!--bean class="com.qgb.day2.advice.CustomExceptionResolve" /-->
+    <bean class="com.obor.aircp.advice.CustomExceptionResolve"/>
 
     <!-- 自动代理创建器，自动将@Aspect注解切面类织入到目标bean中 -->
     <bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator"/>
 
+    <bean id="sUserMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.obor.aircp.mapper.SUserMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="hOrderMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.obor.aircp.mapper.HOrderMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="hCommentMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.obor.aircp.mapper.HCommentMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="hCityMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.obor.aircp.mapper.HCityMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="hHotelMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.obor.aircp.mapper.HHotelMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="pUserMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.obor.aircp.mapper.PUserMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="hRecMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.obor.aircp.mapper.HRecMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
 
-
+    <bean id="hServiceMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.obor.aircp.mapper.HServiceMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="sUserService" class="com.obor.aircp.service.impl.SUserServiceImpl"/>
+    <bean id="hOrderService" class="com.obor.aircp.service.impl.HOrderServiceImpl" />
+    <bean id="hCommentService" class="com.obor.aircp.service.impl.HCommentServiceImpl" />
+    <bean id="hCityService" class="com.obor.aircp.service.impl.HCityServiceImpl"/>
 </beans>
