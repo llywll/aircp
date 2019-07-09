@@ -1,7 +1,6 @@
 package com.obor.aircp.interceptor;
 
 import com.obor.aircp.exception.ServiceException;
-import com.obor.aircp.model.PUser;
 import com.obor.aircp.model.SUser;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -18,7 +17,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        PUser user = (PUser) request.getSession().getAttribute("user");
+        SUser user = (SUser) request.getSession().getAttribute("user");
         if (user == null){
             throw new ServiceException("尚未登录，无权访问此页");
         }
