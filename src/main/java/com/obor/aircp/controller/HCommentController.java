@@ -24,17 +24,20 @@ public class HCommentController extends BaseController {
     }
 
     @RequestMapping("getAll")
+    @ResponseBody
     public Map getAll() {
         List<HComment> list = hCommentService.getAll();
         return result(list, hCommentService.getCount(), "");
     }
 
     @RequestMapping("getById")
+    @ResponseBody
     public HComment getById(@RequestParam("id") String id) {
         return hCommentService.getById(id);
     }
 
     @RequestMapping("deleteId")
+    @ResponseBody
     public Map deleteId(@RequestParam("id") String id) {
         if (hCommentService.deleteById(id) > 0)
             return result(SUCCESS, "删除成功");
@@ -42,6 +45,7 @@ public class HCommentController extends BaseController {
     }
 
     @RequestMapping("upHComment")
+    @ResponseBody
     public Map upInfo(@ModelAttribute("HComment") HComment HComment) {
         if (hCommentService.update(HComment) > 0)
             return result(SUCCESS, "更新成功");
@@ -49,6 +53,7 @@ public class HCommentController extends BaseController {
     }
 
     @RequestMapping("addHComment")
+    @ResponseBody
     public Map addHec(@ModelAttribute("HComment") HComment HComment) {
         if (hCommentService.add(HComment) > 0)
             return result(SUCCESS, "新增成功");

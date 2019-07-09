@@ -9,7 +9,7 @@
         <result column="hotel_site_id" jdbcType="VARCHAR" property="hotelSiteId"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, hotel_name, hotel_info, hotel_content, hotel_site_id
+    id, hotel_name, hotel_info, hotel_content, hotel_city_id
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select

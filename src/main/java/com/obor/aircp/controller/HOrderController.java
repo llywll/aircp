@@ -39,17 +39,20 @@ public class HOrderController extends BaseController {
     }
 
     @RequestMapping("getAll")
+    @ResponseBody
     public Map getAll() {
         List<HOrder> list = hOrderService.getAll();
         return result(list, hOrderService.getCount(), "");
     }
 
     @RequestMapping("getById")
+    @ResponseBody
     public HOrder getById(@RequestParam("id") String id) {
         return hOrderService.getById(id);
     }
 
     @RequestMapping("deleteId")
+    @ResponseBody
     public Map deleteId(@RequestParam("id") String id) {
         if (hOrderService.deleteById(id) > 0)
             return result(SUCCESS, "删除成功");
@@ -57,6 +60,7 @@ public class HOrderController extends BaseController {
     }
 
     @RequestMapping("upStatus")
+    @ResponseBody
     public Map upStatus(@RequestParam("id") String id, @RequestParam("status") String status) {
         if (hOrderService.upOrderStatus(id, status) > 0)
             return result(SUCCESS, "更新成功");
@@ -64,6 +68,7 @@ public class HOrderController extends BaseController {
     }
 
     @RequestMapping("upInfo")
+    @ResponseBody
     public Map upInfo(@ModelAttribute("HOrder") HOrder hOrder) {
         if (hOrderService.upOrderInfo(hOrder) > 0)
             return result(SUCCESS, "更新成功");
@@ -71,6 +76,7 @@ public class HOrderController extends BaseController {
     }
 
     @RequestMapping("addOrder")
+    @ResponseBody
     public Map addOrder(@ModelAttribute("HOrder") HOrder hOrder) {
         if (hOrderService.addOrderInfo(hOrder) > 0)
             return result(SUCCESS, "新增成功");

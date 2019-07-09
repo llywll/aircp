@@ -24,17 +24,20 @@ public class HHotelController extends BaseController {
     }
 
     @RequestMapping("getAll")
+    @ResponseBody
     public Map getAll() {
         List<HHotel> list = hHotelService.getAll();
         return result(list, hHotelService.getCount(), "");
     }
 
     @RequestMapping("getById")
+    @ResponseBody
     public HHotel getById(@RequestParam("id") String id) {
         return hHotelService.getById(id);
     }
 
     @RequestMapping("deleteId")
+    @ResponseBody
     public Map deleteId(@RequestParam("id") String id) {
         if (hHotelService.deleteById(id) > 0)
             return result(SUCCESS, "删除成功");
@@ -42,6 +45,7 @@ public class HHotelController extends BaseController {
     }
 
     @RequestMapping("upHHotel")
+    @ResponseBody
     public Map upInfo(@ModelAttribute("HHotel") HHotel HHotel) {
         if (hHotelService.update(HHotel) > 0)
             return result(SUCCESS, "更新成功");
@@ -49,6 +53,7 @@ public class HHotelController extends BaseController {
     }
 
     @RequestMapping("addHHotel")
+    @ResponseBody
     public Map addHec(@ModelAttribute("HHotel") HHotel HHotel) {
         if (hHotelService.add(HHotel) > 0)
             return result(SUCCESS, "新增成功");

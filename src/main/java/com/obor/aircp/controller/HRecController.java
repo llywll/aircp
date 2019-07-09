@@ -25,17 +25,20 @@ public class HRecController extends BaseController {
     }
 
     @RequestMapping("getAll")
+    @ResponseBody
     public Map getAll() {
         List<HRec> list = hRecService.getAll();
         return result(list, hRecService.getCount(), "");
     }
 
     @RequestMapping("getById")
+    @ResponseBody
     public HRec getById(@RequestParam("id") String id) {
         return hRecService.getById(id);
     }
 
     @RequestMapping("deleteId")
+    @ResponseBody
     public Map deleteId(@RequestParam("id") String id) {
         if (hRecService.deleteById(id) > 0)
             return result(SUCCESS, "删除成功");
@@ -43,6 +46,7 @@ public class HRecController extends BaseController {
     }
 
     @RequestMapping("upHRec")
+    @ResponseBody
     public Map upInfo(@ModelAttribute("HRec") HRec HRec) {
         if (hRecService.update(HRec) > 0)
             return result(SUCCESS, "更新成功");
@@ -50,6 +54,7 @@ public class HRecController extends BaseController {
     }
 
     @RequestMapping("addHRec")
+    @ResponseBody
     public Map addHec(@ModelAttribute("HRec") HRec HRec) {
         if (hRecService.add(HRec) > 0)
             return result(SUCCESS, "新增成功");

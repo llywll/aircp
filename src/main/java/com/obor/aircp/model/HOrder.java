@@ -10,6 +10,10 @@ import java.util.Date;
  * @author 
  */
 public class HOrder implements Serializable {
+    enum OrderStatus
+    {
+        ongoing, notPaying, finish, backout
+    }
     /**
      * 订单编号
      */
@@ -51,7 +55,7 @@ public class HOrder implements Serializable {
     /**
      * 订单状态
      */
-    private String orderStatus;
+    private OrderStatus orderStatus;
 
     /**
      * 订单备注
@@ -116,11 +120,11 @@ public class HOrder implements Serializable {
         this.endDate = endDate;
     }
 
-    public String getOrderStatus() {
+    public OrderStatus getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(String orderStatus) {
+    public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
     }
 

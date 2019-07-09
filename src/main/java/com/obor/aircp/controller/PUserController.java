@@ -18,27 +18,32 @@ import java.util.Map;
 public class PUserController extends BaseController {
 
     @RequestMapping("register")
+    @ResponseBody
     public PUser register(@ModelAttribute("PUser") PUser pUser) {
         return pUserService.register(pUser);
     }
 
     @RequestMapping("getByUserId")
+    @ResponseBody
     public PUser getByUserId(String id) {
         return pUserService.getById(id);
     }
 
     @RequestMapping("getAll")
+    @ResponseBody
     public Map getAll() {
         List<PUser> list=pUserService.getAll();
         return result(list,pUserService.getCount(),"");
     }
     @RequestMapping("update")
+    @ResponseBody
     public Map update(@ModelAttribute("PUser")PUser pUser) {
         if(pUserService.update(pUser)>0)
             return result(SUCCESS,"更新成功");
         return result(ERROR,"更新失败");
     }
     @RequestMapping("deleteById")
+    @ResponseBody
     public Map deleteById(String id) {
         if(pUserService.deleteById(id)>0)
             return result(SUCCESS,"删除成功");

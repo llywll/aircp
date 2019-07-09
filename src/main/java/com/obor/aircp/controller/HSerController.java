@@ -24,17 +24,20 @@ public class HSerController extends BaseController {
     }
 
     @RequestMapping("getAll")
+    @ResponseBody
     public Map getAll() {
         List<HService> list = hSerService.getAll();
         return result(list, hSerService.getCount(), "");
     }
 
     @RequestMapping("getById")
+    @ResponseBody
     public HService getById(@RequestParam("id") String id) {
         return hSerService.getById(id);
     }
 
     @RequestMapping("deleteId")
+    @ResponseBody
     public Map deleteId(@RequestParam("id") String id) {
         if (hSerService.deleteById(id) > 0)
             return result(SUCCESS, "删除成功");
@@ -42,6 +45,7 @@ public class HSerController extends BaseController {
     }
 
     @RequestMapping("upHService")
+    @ResponseBody
     public Map upInfo(@ModelAttribute("HService") HService HService) {
         if (hSerService.update(HService) > 0)
             return result(SUCCESS, "更新成功");
@@ -49,6 +53,7 @@ public class HSerController extends BaseController {
     }
 
     @RequestMapping("addHService")
+    @ResponseBody
     public Map addHec(@ModelAttribute("HService") HService HService) {
         if (hSerService.add(HService) > 0)
             return result(SUCCESS, "新增成功");

@@ -37,6 +37,10 @@
             <mvc:exclude-mapping path="/**/*.js"/>
             <mvc:exclude-mapping path="/**/*.css"/>
             <mvc:exclude-mapping path="/**/*.jpg"/>
+            <mvc:exclude-mapping path="/**/hotel/get*"/>
+            <mvc:exclude-mapping path="/**/rec/get*"/>
+            <mvc:exclude-mapping path="/**/service/get*"/>
+            <mvc:exclude-mapping path="/**/comment/get*"/>
             <bean class="com.obor.aircp.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
@@ -102,11 +106,11 @@
         <property name="mapperInterface" value="com.obor.aircp.mapper.HRecMapper"/>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
-
     <bean id="hServiceMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
         <property name="mapperInterface" value="com.obor.aircp.mapper.HServiceMapper"/>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
+
     <bean id="sUserService" class="com.obor.aircp.service.impl.SUserServiceImpl"/>
     <bean id="hOrderService" class="com.obor.aircp.service.impl.HOrderServiceImpl" />
     <bean id="hCommentService" class="com.obor.aircp.service.impl.HCommentServiceImpl" />
