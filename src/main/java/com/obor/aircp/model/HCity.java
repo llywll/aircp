@@ -10,12 +10,12 @@ public class HCity implements Serializable {
     /**
      * 地点编号
      */
-    private String id;
+    public String id;
 
     /**
      * 地点名称
      */
-    private String cityName;
+    public String cityName;
 
     private static final long serialVersionUID = 1L;
 

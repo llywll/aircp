@@ -8,6 +8,11 @@
   <sql id="Base_Column_List">
     id, city_name
   </sql>
+  <select id="selectAllcity" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+     from h_city
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -25,11 +30,17 @@
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.obor.aircp.model.HCity" useGeneratedKeys="true">
     insert into h_city
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
       <if test="cityName != null">
         city_name,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
       <if test="cityName != null">
         #{cityName,jdbcType=VARCHAR},
       </if>
@@ -44,6 +55,7 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.obor.aircp.model.HCity">
     update h_city
     set city_name = #{cityName,jdbcType=VARCHAR}

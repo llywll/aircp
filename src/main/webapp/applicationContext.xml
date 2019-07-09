@@ -70,6 +70,10 @@
     <!-- 自动代理创建器，自动将@Aspect注解切面类织入到目标bean中 -->
     <bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator"/>
 
-
+<bean id="hCtiyMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    <property name="mapperInterface" value="com.obor.aircp.mapper.HCityMapper"/>
+    <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+</bean>
+<bean id="hCityService"  class="com.obor.aircp.service.impl.CityServiceImpl"/>
 
 </beans>
