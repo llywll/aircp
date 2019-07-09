@@ -22,18 +22,32 @@
     delete from h_service
     where id = #{id,jdbcType=VARCHAR}
   </delete>
+  <select id="selectByPage" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List"/>
+  from h_service
+  limit #{pstart,jdbcType=INTEGER},#{psize,jdbcType=INTEGER}
+</select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from h_service
+  </select>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.obor.aircp.model.HService" useGeneratedKeys="true">
-    insert into h_service (service_name, service_info, service_money, 
+    insert into h_service (id,service_name, service_info, service_money,
       service_type, hotel_id)
-    values (#{serviceName,jdbcType=VARCHAR}, #{serviceInfo,jdbcType=VARCHAR}, #{serviceMoney,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR},#{serviceName,jdbcType=VARCHAR}, #{serviceInfo,jdbcType=VARCHAR}, #{serviceMoney,jdbcType=VARCHAR},
       #{serviceType,jdbcType=VARCHAR}, #{hotelId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.obor.aircp.model.HService" useGeneratedKeys="true">
     insert into h_service
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="serviceName != null">
-        service_name,
-      </if>
+        <if test="id != null">
+            id,
+        </if>
+        <if test="serviceName != null">
+            service_name,
+        </if>
       <if test="serviceInfo != null">
         service_info,
       </if>
@@ -48,9 +62,12 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="serviceName != null">
-        #{serviceName,jdbcType=VARCHAR},
-      </if>
+        <if test="id != null">
+            #{id,jdbcType=VARCHAR},
+        </if>
+        <if test="serviceName != null">
+            #{serviceName,jdbcType=VARCHAR},
+        </if>
       <if test="serviceInfo != null">
         #{serviceInfo,jdbcType=VARCHAR},
       </if>

@@ -1,125 +1,162 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.obor.aircp.mapper.HOrderMapper">
-  <resultMap id="BaseResultMap" type="com.obor.aircp.model.HOrder">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="order_name" jdbcType="VARCHAR" property="orderName" />
-    <result column="user_id" jdbcType="VARCHAR" property="userId" />
-    <result column="order_commodity_id" jdbcType="VARCHAR" property="orderCommodityId" />
-    <result column="money" jdbcType="VARCHAR" property="money" />
-    <result column="start_date" jdbcType="TIMESTAMP" property="startDate" />
-    <result column="end_date" jdbcType="TIMESTAMP" property="endDate" />
-    <result column="order_status" jdbcType="VARCHAR" property="orderStatus" />
-    <result column="order_comment" jdbcType="VARCHAR" property="orderComment" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.obor.aircp.model.HOrder">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="order_name" jdbcType="VARCHAR" property="orderName"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="order_commodity_id" jdbcType="VARCHAR" property="orderCommodityId"/>
+        <result column="money" jdbcType="VARCHAR" property="money"/>
+        <result column="start_date" jdbcType="TIMESTAMP" property="startDate"/>
+        <result column="end_date" jdbcType="TIMESTAMP" property="endDate"/>
+        <result column="order_status" jdbcType="VARCHAR" property="orderStatus"/>
+        <result column="order_comment" jdbcType="VARCHAR" property="orderComment"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, order_name, user_id, order_commodity_id, money, start_date, end_date, order_status, 
     order_comment
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from h_order
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from h_order
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByPage" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from h_order
+        limit #{pstart,jdbcType=INTEGER},#{psize,jdbcType=INTEGER}
+    </select>
+    <select id="selectByPageTheSorting" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from h_order
+        order by
+        <choose>
+            <when test="isStart == t">
+                start_date
+            </when>
+            <otherwise>
+                end_date
+            </otherwise>
+        </choose>
+        <if test="isDesc == t">
+            DESC
+        </if>
+        limit #{pstart,jdbcType=VARCHAR},#{psize,jdbcType=VARCHAR}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from h_order
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from h_order
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.obor.aircp.model.HOrder" useGeneratedKeys="true">
-    insert into h_order (order_name, user_id, order_commodity_id, 
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.obor.aircp.model.HOrder"
+            useGeneratedKeys="true">
+    insert into h_order (id,order_name, user_id, order_commodity_id,
       money, start_date, end_date, 
       order_status, order_comment)
-    values (#{orderName,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{orderCommodityId,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR},#{orderName,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{orderCommodityId,jdbcType=VARCHAR},
       #{money,jdbcType=VARCHAR}, #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}, 
       #{orderStatus,jdbcType=VARCHAR}, #{orderComment,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.obor.aircp.model.HOrder" useGeneratedKeys="true">
-    insert into h_order
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="orderName != null">
-        order_name,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="orderCommodityId != null">
-        order_commodity_id,
-      </if>
-      <if test="money != null">
-        money,
-      </if>
-      <if test="startDate != null">
-        start_date,
-      </if>
-      <if test="endDate != null">
-        end_date,
-      </if>
-      <if test="orderStatus != null">
-        order_status,
-      </if>
-      <if test="orderComment != null">
-        order_comment,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="orderName != null">
-        #{orderName,jdbcType=VARCHAR},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="orderCommodityId != null">
-        #{orderCommodityId,jdbcType=VARCHAR},
-      </if>
-      <if test="money != null">
-        #{money,jdbcType=VARCHAR},
-      </if>
-      <if test="startDate != null">
-        #{startDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="endDate != null">
-        #{endDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="orderStatus != null">
-        #{orderStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="orderComment != null">
-        #{orderComment,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.obor.aircp.model.HOrder">
-    update h_order
-    <set>
-      <if test="orderName != null">
-        order_name = #{orderName,jdbcType=VARCHAR},
-      </if>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="orderCommodityId != null">
-        order_commodity_id = #{orderCommodityId,jdbcType=VARCHAR},
-      </if>
-      <if test="money != null">
-        money = #{money,jdbcType=VARCHAR},
-      </if>
-      <if test="startDate != null">
-        start_date = #{startDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="endDate != null">
-        end_date = #{endDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="orderStatus != null">
-        order_status = #{orderStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="orderComment != null">
-        order_comment = #{orderComment,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.obor.aircp.model.HOrder">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.obor.aircp.model.HOrder"
+            useGeneratedKeys="true">
+        insert into h_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="orderName != null">
+                order_name,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="orderCommodityId != null">
+                order_commodity_id,
+            </if>
+            <if test="money != null">
+                money,
+            </if>
+            <if test="startDate != null">
+                start_date,
+            </if>
+            <if test="endDate != null">
+                end_date,
+            </if>
+            <if test="orderStatus != null">
+                order_status,
+            </if>
+            <if test="orderComment != null">
+                order_comment,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="orderName != null">
+                #{orderName,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderCommodityId != null">
+                #{orderCommodityId,jdbcType=VARCHAR},
+            </if>
+            <if test="money != null">
+                #{money,jdbcType=VARCHAR},
+            </if>
+            <if test="startDate != null">
+                #{startDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endDate != null">
+                #{endDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderStatus != null">
+                #{orderStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="orderComment != null">
+                #{orderComment,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.obor.aircp.model.HOrder">
+        update h_order
+        <set>
+            <if test="orderName != null">
+                order_name = #{orderName,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderCommodityId != null">
+                order_commodity_id = #{orderCommodityId,jdbcType=VARCHAR},
+            </if>
+            <if test="money != null">
+                money = #{money,jdbcType=VARCHAR},
+            </if>
+            <if test="startDate != null">
+                start_date = #{startDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endDate != null">
+                end_date = #{endDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderStatus != null">
+                order_status = #{orderStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="orderComment != null">
+                order_comment = #{orderComment,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.obor.aircp.model.HOrder">
     update h_order
     set order_name = #{orderName,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=VARCHAR},
@@ -131,4 +168,10 @@
       order_comment = #{orderComment,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+    <update id="updateState" parameterType="java.lang.String">
+    update h_order set order_status = #{state,jdbcType=VARCHAR} where id = #{id,jdbcType=VARCHAR}
+  </update>
+    <select id="getCount" resultType="java.lang.Integer">
+    select count(id) from h_order
+  </select>
 </mapper>

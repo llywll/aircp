@@ -22,14 +22,17 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.obor.aircp.model.HRec" useGeneratedKeys="true">
-    insert into h_rec (city_rec_name, city_rec_context, city_comment, 
+    insert into h_rec (id,city_rec_name, city_rec_context, city_comment,
       city_id)
-    values (#{cityRecName,jdbcType=VARCHAR}, #{cityRecContext,jdbcType=VARCHAR}, #{cityComment,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR},#{cityRecName,jdbcType=VARCHAR}, #{cityRecContext,jdbcType=VARCHAR}, #{cityComment,jdbcType=VARCHAR},
       #{cityId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.obor.aircp.model.HRec" useGeneratedKeys="true">
     insert into h_rec
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
       <if test="cityRecName != null">
         city_rec_name,
       </if>

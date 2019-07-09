@@ -14,7 +14,7 @@ public class HOrderServiceImpl extends BaseService implements HOrderService {
     }
 
     @Override
-    public List<HOrder> selectByPageTheSorting(String isStart, String isDesc, int pstart, int psize) {
+    public List<HOrder> selectByPageTheSorting(String isStart, String isDesc, String pstart, String psize) {
         return hOrderMapper.selectByPageTheSorting(isStart,isDesc,pstart,psize);
     }
 

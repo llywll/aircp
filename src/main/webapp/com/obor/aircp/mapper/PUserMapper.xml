@@ -20,21 +20,41 @@
     from p_user
     where id = #{id,jdbcType=VARCHAR}
   </select>
+  <select id="selectByUserNameAndPassword" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from p_user
+    where user_name = #{userName,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPage" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from p_user
+    limit #{pstart,jdbcType=INTEGER},#{psize,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from p_user
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from p_user
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.obor.aircp.model.PUser" useGeneratedKeys="true">
-    insert into p_user (user_name, `password`, sex, 
+    insert into p_user (id,user_name, `password`, sex,
       birthdate, user_type, id_type, 
       id_number)
-    values (#{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR},#{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR},
       #{birthdate,jdbcType=DATE}, #{userType,jdbcType=VARCHAR}, #{idType,jdbcType=VARCHAR}, 
       #{idNumber,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.obor.aircp.model.PUser" useGeneratedKeys="true">
     insert into p_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
       <if test="userName != null">
         user_name,
       </if>
@@ -58,6 +78,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
       <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
       </if>

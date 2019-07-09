@@ -9,7 +9,7 @@ public interface HOrderService {
     List<HOrder> getByPage(int pstart, int psize);
 
     List<HOrder> selectByPageTheSorting(@Param("isStart")String isStart, @Param("isDesc")String isDesc,
-                                        int pstart, int psize);
+                                        String pstart, String psize);
 
     List<HOrder> getAll();
 
