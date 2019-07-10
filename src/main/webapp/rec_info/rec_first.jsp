@@ -30,11 +30,7 @@
         window.location.href=url;
 
     }
-    function  update() {
 
-        var rec_name=document.getElementById("");
-        var url="/rec_info/rec_add.jsp?rec_name=";
-    }
 </script>
 <body>
 -------------------------------------------------------------------
@@ -71,11 +67,11 @@
         <td><c:out value="${reclista.cityRecName }" /></td>
         <td><c:out value="${reclista.cityRecContext }" /></td>
         <td><c:out value="${reclista.cityComment }" /></td>
-        <td><a href="/rec_info/rec_add.jsp?rec_id=${reclista.id }&rec_name=${reclista.cityRecName }&rec_context=${reclista.cityRecContext }&rec_comment=${reclista.cityComment }" >修改</a>
-        <a href="/deleterec?recid=${reclista.id }" >删除</a></td>
+
+        <td><a href="/rec_info/rec_update.jsp?recid=${reclista.id}&recname=${reclista.cityRecName }&reccontext=${reclista.cityRecContext }&reccomment=${reclista.cityComment }" >修改</a>
+            <a href="/deleterec?recid=${reclista.id }" >删除</a></td>
     </tr>
 </c:forEach>
-
 
 </body>
 </html>

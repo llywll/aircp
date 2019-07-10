@@ -1,4 +1,3 @@
-@@ -0,0 +1,22 @@
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -13,10 +12,10 @@
 </head>
 <body>
 <form action="/updaterec" method="post">
-    <br>景点代码：${param.rec_id }<input type="hidden" name="rec_id" value="${param.rec_id }" />
-    <br/>景点名称：<input type="text" name="rec_name" value="${param.rec_name }" />
-    <br/>景点介绍：<input type="text" name="rec_context"  value="${param.rec_context }"/>
-    <br/>景点评论：<input type="text" name="rec_comment" value="${param.rec_comment }" />
+    <br>景点代码：${param.recid }<input type="hidden" name="recid" value="${param.recid }" />
+    <br/>景点名称：<input type="text" name="recname" value="${param.recname }" />
+    <br/>景点介绍：<input type="text" name="reccontext"  value="${param.reccontext }"/>
+    <br/>景点评论：<input type="text" name="reccomment" value="${param.reccomment }" />
     <br/><input type="submit" value="提交" />
 </form>
 </body>
