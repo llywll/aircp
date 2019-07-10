@@ -58,7 +58,18 @@ public class RecController {
         modelAndView.setViewName("rec_info/rec_first");
         return modelAndView;
     }
-
+    //增加rec
+    @RequestMapping("/addrec")
+    public String addrec(HRec hRec,HttpServletRequest request){
+        hRec.setId("sdfdsf");
+        hRec.setCityId(request.getParameter("cityid"));
+        hRec.setCityRecName(request.getParameter("rec_name"));
+        hRec.setCityRecContext(request.getParameter("rec_context"));
+        hRec.setCityComment(request.getParameter("rec_comment"));
+        System.out.println(hRec);
+        recService.addrec(hRec);
+        return "redirect:/reclistbycity";
+    }
     //删除Rec
     @RequestMapping("/deleterec")
     public String delrec(HttpServletRequest an){

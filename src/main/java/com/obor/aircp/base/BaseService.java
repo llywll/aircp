@@ -1,7 +1,6 @@
 package com.obor.aircp.base;
 
 import com.obor.aircp.mapper.*;
-import com.obor.aircp.service.HCityService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class BaseService {

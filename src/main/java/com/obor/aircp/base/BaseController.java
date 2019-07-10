@@ -1,7 +1,5 @@
 package com.obor.aircp.base;
 
-import com.obor.aircp.service.HOrderService;
-import com.obor.aircp.service.SUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Collection;
@@ -11,13 +9,13 @@ import java.util.Map;
 public class BaseController {
     protected final String SUCCESS = "success";
     protected final String ERROR = "error";
-
+/*
     @Autowired
     protected SUserService sUserService;
 
     @Autowired
     protected HOrderService hOrderService;
-
+*/
     protected Map<String, Object> result (String state, String message){
         Map<String, Object> map = new HashMap<>();
         map.put("state", state);
