@@ -1,6 +1,7 @@
 package com.obor.aircp.service.impl;
 
 import com.obor.aircp.base.BaseService;
+import com.obor.aircp.model.HOderView;
 import com.obor.aircp.model.HOrder;
 import com.obor.aircp.service.HOrderService;
 
@@ -9,17 +10,17 @@ import java.util.UUID;
 
 public class HOrderServiceImpl extends BaseService implements HOrderService {
     @Override
-    public List<HOrder> getByPage(int pstart, int psize) {
+    public List<HOderView> getByPage(int pstart, int psize) {
         return hOrderMapper.selectByPage(pstart,psize);
     }
 
     @Override
-    public List<HOrder> selectByPageTheSorting(String isStart, String isDesc, int pstart, int psize) {
+    public List<HOderView> selectByPageTheSorting(String isStart, String isDesc, int pstart, int psize) {
         return hOrderMapper.selectByPageTheSorting(isStart,isDesc,pstart,psize);
     }
 
     @Override
-    public List<HOrder> getAll(){
+    public List<HOderView> getAll(){
         return hOrderMapper.selectAll();
     }
     @Override

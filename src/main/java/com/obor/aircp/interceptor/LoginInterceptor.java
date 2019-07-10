@@ -18,9 +18,14 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         SUser user = (SUser) request.getSession().getAttribute("user");
-        if (user == null){
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "*");
+        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Headers",
+                "Origin, X-Requested-With, Content-Type, Accept");
+        /*if (user == null){
             throw new ServiceException("尚未登录，无权访问此页");
-        }
+        }*/
         return true;
     }
 

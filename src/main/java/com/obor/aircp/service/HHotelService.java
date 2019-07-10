@@ -1,7 +1,8 @@
 package com.obor.aircp.service;
 
+import com.github.pagehelper.PageInfo;
 import com.obor.aircp.model.HHotel;
-import org.apache.ibatis.annotations.Param;
+import com.obor.aircp.model.HHotelView;
 
 import java.util.List;
 
@@ -13,6 +14,8 @@ public interface HHotelService {
     HHotel getById(String id);
 
     List<HHotel> getAll();
+
+    PageInfo<HHotelView> getByMoney(int minMoney, int maxMoney, int pno, int psize);
 
     List<HHotel> getByPage(int pstart, int psize);
 

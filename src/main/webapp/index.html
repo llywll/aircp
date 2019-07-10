@@ -52,7 +52,7 @@
                         <span class="sidebar-collapse-icon ti-angle-down"></span>
                     </a>
                     <ul style="display: block;">
-                        <li ><a href="chart-flot.html"></a></li>
+                        <li><a href="chart-flot.html"></a></li>
                         <li><a href="chart-morris.html">Morris</a></li>
                         <li><a href="chartjs.html">Chartjs</a></li>
                         <li><a href="chartist.html">Chartist</a></li>
@@ -61,7 +61,8 @@
                         <li><a href="chart-knob.html">Knob</a></li>
                     </ul>
                 </li>
-                <li class="active"><a href="javascript:void(0);" class="active" id="place_b"><i class="ti-calendar"></i> 地点精选 </a></li>
+                <li class="active"><a href="javascript:void(0);" class="active" id="place_b"><i class="ti-calendar"></i>
+                    地点精选 </a></li>
                 <li><a href="javascript:void(0);" id="place_u"><i class="ti-email"></i> 用户管理</a></li>
                 <li><a href="javascript:void(0);" id="place_o"><i class="ti-user"></i> 订单管理</a></li>
                 <li><a href="javascript:void(0);" id="place_h"><i class="ti-layout-grid2-alt"></i> 商品管理</a></li>
@@ -258,6 +259,276 @@
 
 </div>
 
+<div class="modal_Box" id="modalBox">
+
+</div>
+<!-- 更新模态框 -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Recipient:</label>
+                        <input type="text" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">Message:</label>
+                        <textarea class="form-control" id="message-text"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 删除模态框 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">警告</h4>
+            </div>
+            <div class="modal-body">
+                删除订单？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-danger">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/x-handlebars-template" id="orderTemp">
+    ​
+    <div class="main">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8 p-r-0 title-margin-right">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <h1>用户管理</h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- /# column -->
+                <div class="col-lg-4 p-l-0 title-margin-left">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Table-Jsgrid</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <!-- /# column -->
+            </div>
+            <!-- /# row -->
+
+            <form class="form-inline definewidth m20" action="index.html" method="get">
+                用户名称：
+                <input type="text" name="username" id="username" class="abc input-default" placeholder="" value="">&nbsp;&nbsp;
+                <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp;
+                <a href="./order/add.html" class="btn btn-success" id="addnew">新增用户</a>&nbsp;&nbsp;
+                <!--a href="./order/edit.html" class="btn btn-success" id="update">修改</a>&nbsp;&nbsp;
+                <a href="./order/del.html" class="btn btn-success" id="remove">删除</a-->
+            </form>
+            <table class="table table-bordered table-hover definewidth m10" id="orderTable">
+                <thead>
+                <tr>
+                    <th>订单编号</th>
+                    <th>订单名称</th>
+                    <th>用户编号</th>
+                    <th>用户姓名</th>
+                    <th>用户绑定手机</th>
+                    <th>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                起效日期 <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">按升序</a></li>
+                                <li><a href="#">按降序</a></li>
+                            </ul>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="btn-group">
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                结束日期 <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">按升序</a></li>
+                                <li><a href="#">按降序</a></li>
+                            </ul>
+                        </div>
+                    </th>
+                    <th>酒店编号</th>
+                    <th>订单金额</th>
+                    <th>订单状态</th>
+                    <th>订单备注</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                {{#each sdata}}
+                <tr id="order_line" data-id="{{id}}">
+                    <td> {{id}}</td>
+                    <td> {{orderName}}</td>
+                    <td> {{userId }}</td>
+                    <td> {{userName }}</td>
+                    <td> {{phone}}</td>
+                    <td> {{startDate}}</td>
+                    <td> {{endDate }}</td>
+                    <td> {{orderCommodityId }}</td>
+                    <td> {{money}}</td>
+                    <td> {{orderStatus}}</td>
+                    <td> {{orderComment}}</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" data-id="{{id}}" class="btn btn-info showInfoBtn">详情
+                            </button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#exampleModal" data-whatever="@fat">更新
+                            </button>
+                            <button type="button" class="btn btn-danger"
+                                    data-toggle="modal" data-target="#myModal">审核
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                {{/each }}
+            </table>
+
+
+        </div>
+    </div>
+</script>
+
+<!-- 详情模态框 -->
+<script type="text/x-handlebars-template" id="infoModalTemp">
+    <div class="modal fade bs-example-modal-lg" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="infoModalLabel">{{orderName}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="user-profile">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="user-photo m-b-30">
+                                            <img class="img-fluid" src="assets/images/user-profile.jpg" alt="">
+                                        </div>
+                                        <div class="user-work">
+                                            <h4>work</h4>
+                                            <div class="work-content">
+                                                <h3>It Solution </h3>
+                                                <p>123, South Mugda</p>
+                                                <p>New York, 1214</p>
+                                            </div>
+                                            <div class="work-content">
+                                                <h3>Unix</h3>
+                                                <p>123, South Mugda</p>
+                                                <p>New York, 1214</p>
+                                            </div>
+                                        </div>
+                                        <div class="user-skill">
+                                            <h4>Skill</h4>
+                                            <ul>
+                                                <li>
+                                                    <a href="#">Branding</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">UI/UX</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Web Design</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Wordpress</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Magento</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="user-profile-name">john doe</div>
+                                        <div class="user-Location">
+                                            <i class="ti-location-pin"></i> New York, New York</div>
+                                        <div class="user-job-title">Product Designer</div>
+                                        <div class="ratings">
+                                            <h4>Ratings</h4>
+                                            <div class="rating-star">
+                                                <span>8.9</span>
+                                                <i class="ti-star color-primary"></i>
+                                                <i class="ti-star color-primary"></i>
+                                                <i class="ti-star color-primary"></i>
+                                                <i class="ti-star color-primary"></i>
+                                                <i class="ti-star"></i>
+                                            </div>
+                                        </div>
+                                        <div class="user-send-message">
+                                            <button class="btn btn-primary btn-addon" type="button">
+                                                <i class="ti-email"></i>Send Message</button>
+                                        </div>
+                                        <div class="custom-tab user-profile-tab">
+                                            <ul class="nav nav-tabs" role="tablist">
+                                                <li role="presentation" class="active">
+                                                    <a href="#1" aria-controls="1" role="tab" data-toggle="tab">About</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div role="tabpanel" class="tab-pane active" id="1">
+                                                    <div class="contact-information">
+                                                        <h4>Contact information</h4>
+                                                        <div class="website-content">
+                                                            <span class="contact-title">Website:</span>
+                                                            <span class="contact-website">www.Admin Board.com</span>
+                                                        </div>
+                                                        <div class="gender-content">
+                                                            <span class="contact-title">Gender:</span>
+                                                            <span class="gender">Male</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</script>
+
+
 <!-- jquery vendor -->
 <script src="static/js/lib/jquery.min.js"></script>
 <script src="static/js/lib/jquery.nanoscroller.min.js"></script>
@@ -265,10 +536,8 @@
 <script src="static/js/lib/menubar/sidebar.js"></script>
 <script src="static/js/lib/preloader/pace.min.js"></script>
 <!-- sidebar static-->
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.js"></script>
 <script src="static/js/lib/bootstrap.min.js"></script>
-<script src="static/js/vue.min.js"></script>
-
 <script src="static/js/scripts.js"></script>
 
 <!-- bootstrastatic-->

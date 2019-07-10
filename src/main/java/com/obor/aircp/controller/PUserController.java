@@ -4,15 +4,11 @@ import com.obor.aircp.base.BaseController;
 import com.obor.aircp.model.PUser;
 import com.obor.aircp.model.SUser;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
-
 @Controller
 @RequestMapping("/puser")
 public class PUserController extends BaseController {

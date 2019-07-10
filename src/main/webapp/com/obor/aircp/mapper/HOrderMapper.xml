@@ -2,19 +2,37 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.obor.aircp.mapper.HOrderMapper">
     <resultMap id="BaseResultMap" type="com.obor.aircp.model.HOrder">
-        <id column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="order_name" jdbcType="VARCHAR" property="orderName"/>
-        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
-        <result column="order_commodity_id" jdbcType="VARCHAR" property="orderCommodityId"/>
-        <result column="money" jdbcType="VARCHAR" property="money"/>
-        <result column="start_date" jdbcType="TIMESTAMP" property="startDate"/>
-        <result column="end_date" jdbcType="TIMESTAMP" property="endDate"/>
-        <result column="order_status" jdbcType="VARCHAR" property="orderStatus"/>
-        <result column="order_comment" jdbcType="VARCHAR" property="orderComment"/>
+    <id column="id" jdbcType="VARCHAR" property="id"/>
+    <result column="order_name" jdbcType="VARCHAR" property="orderName"/>
+    <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+    <result column="order_commodity_id" jdbcType="VARCHAR" property="orderCommodityId"/>
+    <result column="money" jdbcType="VARCHAR" property="money"/>
+    <result column="start_date" jdbcType="TIMESTAMP" property="startDate"/>
+    <result column="end_date" jdbcType="TIMESTAMP" property="endDate"/>
+    <result column="order_status" jdbcType="VARCHAR" property="orderStatus"/>
+    <result column="order_comment" jdbcType="VARCHAR" property="orderComment"/>
+</resultMap>
+    <resultMap id="BaseResultMap2" type="com.obor.aircp.model.HOderView">
+        <id column="h_order.id" jdbcType="VARCHAR" property="id"/>
+        <result column="h_order.order_name" jdbcType="VARCHAR" property="orderName"/>
+        <result column="h_order.user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="p_user.user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="h_order.order_commodity_id" jdbcType="VARCHAR" property="orderCommodityId"/>
+        <result column="h_order.money" jdbcType="VARCHAR" property="money"/>
+        <result column="h_order.start_date" jdbcType="TIMESTAMP" property="startDate"/>
+        <result column="h_order.end_date" jdbcType="TIMESTAMP" property="endDate"/>
+        <result column="h_order.order_status" jdbcType="VARCHAR" property="orderStatus"/>
+        <result column="h_order.order_comment" jdbcType="VARCHAR" property="orderComment"/>
+        <result column="p_user.phone" jdbcType="VARCHAR" property="phone"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, order_name, user_id, order_commodity_id, money, start_date, end_date, order_status, 
+    id, order_name, user_id, order_commodity_id, money, start_date, end_date, order_status,
     order_comment
+  </sql>
+    <sql id="Base_Column_List2">
+    h_order.id, h_order.order_name, h_order.user_id,p_user.user_name, h_order.order_commodity_id,
+    h_order.money,p_user.phone, h_order.start_date, h_order.end_date, h_order.order_status,
+    h_order.order_comment
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -22,16 +40,16 @@
         from h_order
         where id = #{id,jdbcType=VARCHAR}
     </select>
-    <select id="selectByPage" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectByPage" parameterType="java.lang.Integer" resultMap="BaseResultMap2">
         select
-        <include refid="Base_Column_List"/>
-        from h_order
+        <include refid="Base_Column_List2"/>
+        from h_order right join p_user on h_order.user_id = p_user.id
         limit #{pstart,jdbcType=INTEGER},#{psize,jdbcType=INTEGER}
     </select>
-    <select id="selectByPageTheSorting" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="selectByPageTheSorting" parameterType="java.lang.String" resultMap="BaseResultMap2">
         select
-        <include refid="Base_Column_List"/>
-        from h_order
+        <include refid="Base_Column_List2"/>
+        from h_order right join p_user on h_order.user_id = p_user.id
         order by
         <choose>
             <when test="isStart == 'true'.toString()">
@@ -46,10 +64,10 @@
         </if>
         limit #{pstart,jdbcType=INTEGER},#{psize,jdbcType=INTEGER}
     </select>
-    <select id="selectAll" resultMap="BaseResultMap">
+    <select id="selectAll" resultMap="BaseResultMap2">
         select
-        <include refid="Base_Column_List"/>
-        from h_order
+        <include refid="Base_Column_List2"/>
+        from h_order left join p_user on h_order.user_id = p_user.id
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from h_order

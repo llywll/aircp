@@ -3,14 +3,10 @@ package com.obor.aircp.controller;
 import com.obor.aircp.base.BaseController;
 import com.obor.aircp.model.HComment;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-
 @Controller
 @RequestMapping("/comment")
 public class HCommentController extends BaseController {

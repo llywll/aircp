@@ -2,15 +2,12 @@ package com.obor.aircp.controller;
 
 import com.obor.aircp.base.BaseController;
 import com.obor.aircp.model.HHotel;
+import com.obor.aircp.model.HHotelView;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-
 @Controller
 @RequestMapping("/hotel")
 public class HHotelController extends BaseController {
@@ -25,7 +22,9 @@ public class HHotelController extends BaseController {
 
     @RequestMapping("getAll")
     @ResponseBody
-    public Map getAll() {
+    public Map getAll(
+            @RequestParam(value = "pno", defaultValue = "1", required = false) int pno,
+            @RequestParam(value = "psize", defaultValue = "10", required = false) int psize) {
         List<HHotel> list = hHotelService.getAll();
         return result(list, hHotelService.getCount(), "");
     }
@@ -34,6 +33,16 @@ public class HHotelController extends BaseController {
     @ResponseBody
     public HHotel getById(@RequestParam("id") String id) {
         return hHotelService.getById(id);
+    }
+
+    @RequestMapping("getByMoney")
+    @ResponseBody
+    public Map getByMoney(@RequestParam("minMoney") int minMoney,
+                          @RequestParam("maxMoney") int maxMoney,
+                          @RequestParam(value = "pno", defaultValue = "1", required = false) int pno,
+                          @RequestParam(value = "psize", defaultValue = "10", required = false) int psize) {
+        List<HHotelView> list = hHotelService.getByMoney(minMoney, maxMoney, pno, psize).getList();
+        return result(list, list.size(), "");
     }
 
     @RequestMapping("deleteId")

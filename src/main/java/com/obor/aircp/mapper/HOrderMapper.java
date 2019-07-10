@@ -1,5 +1,6 @@
 package com.obor.aircp.mapper;
 
+import com.obor.aircp.model.HOderView;
 import com.obor.aircp.model.HOrder;
 import org.apache.ibatis.annotations.Param;
 
@@ -14,12 +15,12 @@ public interface HOrderMapper {
 
     HOrder selectByPrimaryKey(String id);
 
-    List<HOrder> selectByPage(@Param("pstart") Integer pstart, @Param("psize") Integer psize);
+    List<HOderView> selectByPage(@Param("pstart") Integer pstart, @Param("psize") Integer psize);
 
-    List<HOrder> selectByPageTheSorting(@Param("isStart") String isStart, @Param("isDesc") String isDesc,
+    List<HOderView> selectByPageTheSorting(@Param("isStart") String isStart, @Param("isDesc") String isDesc,
                                         @Param("pstart") Integer pstart, @Param("psize") Integer psize);
 
-    List<HOrder> selectAll();
+    List<HOderView> selectAll();
 
     int updateByPrimaryKeySelective(HOrder record);
 

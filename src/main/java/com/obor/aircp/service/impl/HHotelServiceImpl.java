@@ -1,7 +1,10 @@
 package com.obor.aircp.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.obor.aircp.base.BaseService;
 import com.obor.aircp.model.HHotel;
+import com.obor.aircp.model.HHotelView;
 import com.obor.aircp.service.HHotelService;
 
 import java.util.List;
@@ -15,7 +18,7 @@ public class HHotelServiceImpl extends BaseService implements HHotelService {
 
     @Override
     public int add(HHotel hHotel) {
-        hHotel.setId(UUID.randomUUID().toString().replace("-",""));
+        hHotel.setId(UUID.randomUUID().toString().replace("-", ""));
         return hHotelMapper.insertSelective(hHotel);
     }
 
@@ -29,9 +32,17 @@ public class HHotelServiceImpl extends BaseService implements HHotelService {
         return hHotelMapper.selectAll();
     }
 
+
+    @Override
+    public PageInfo<HHotelView> getByMoney(int minMoney, int maxMoney, int pno, int psize) {
+        PageHelper.startPage(pno, psize);
+        List<HHotelView> result = hHotelMapper.selectByMoney(minMoney, maxMoney);
+        return new PageInfo(result);
+    }
+
     @Override
     public List<HHotel> getByPage(int pstart, int psize) {
-        return hHotelMapper.selectByPage(pstart,psize);
+        return hHotelMapper.selectByPage(pstart, psize);
     }
 
     @Override

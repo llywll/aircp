@@ -3,17 +3,14 @@ package com.obor.aircp.controller;
 import com.fasterxml.jackson.databind.ser.Serializers;
 import com.obor.aircp.base.BaseController;
 import com.obor.aircp.base.BaseService;
+import com.obor.aircp.model.HOderView;
 import com.obor.aircp.model.HOrder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 @Controller
 @RequestMapping("/order")
 public class HOrderController extends BaseController {
@@ -22,7 +19,7 @@ public class HOrderController extends BaseController {
     @ResponseBody
     public Map getByPage(@RequestParam(value = "pno", defaultValue = "1") int pno,
                          @RequestParam(value = "psize", defaultValue = "10") int psize) {
-        List<HOrder> list = hOrderService.getByPage((pno - 1) * psize, psize);
+        List<HOderView> list = hOrderService.getByPage((pno - 1) * psize, psize);
         return result(list, hOrderService.getCount(), "");
     }
 
@@ -33,7 +30,7 @@ public class HOrderController extends BaseController {
             @RequestParam(value = "isDesc", defaultValue = "false") String isDesc,
             @RequestParam(value = "pno", defaultValue = "1") int pno,
             @RequestParam(value = "psize", defaultValue = "10") int psize) {
-        List<HOrder> list = hOrderService.selectByPageTheSorting(isStart,isDesc,(pno - 1) * psize, psize);
+        List<HOderView> list = hOrderService.selectByPageTheSorting(isStart,isDesc,(pno - 1) * psize, psize);
         return result(list, hOrderService.getCount(), "");
 
     }
@@ -41,7 +38,7 @@ public class HOrderController extends BaseController {
     @RequestMapping("getAll")
     @ResponseBody
     public Map getAll() {
-        List<HOrder> list = hOrderService.getAll();
+        List<HOderView> list = hOrderService.getAll();
         return result(list, hOrderService.getCount(), "");
     }
 

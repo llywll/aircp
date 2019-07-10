@@ -1,17 +1,20 @@
 package com.obor.aircp.service;
 
+import com.obor.aircp.model.HOderView;
 import com.obor.aircp.model.HOrder;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface HOrderService {
-    List<HOrder> getByPage(int pstart, int psize);
+    List<HOderView> getByPage(int pstart, int psize);
 
-    List<HOrder> selectByPageTheSorting(@Param("isStart")String isStart, @Param("isDesc")String isDesc,
+    List<HOderView> selectByPageTheSorting(@Param("isStart")String isStart, @Param("isDesc")String isDesc,
                                         int pstart, int psize);
 
-    List<HOrder> getAll();
+    List<HOderView> getAll();
+
+
 
     HOrder getById(String id);
 

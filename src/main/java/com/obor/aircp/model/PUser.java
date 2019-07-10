@@ -1,5 +1,6 @@
 package com.obor.aircp.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -85,6 +86,7 @@ public class PUser implements Serializable {
         this.sex = sex;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     public Date getBirthdate() {
         return birthdate;
     }

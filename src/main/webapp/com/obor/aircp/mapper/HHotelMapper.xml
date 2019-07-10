@@ -6,10 +6,21 @@
         <result column="hotel_name" jdbcType="VARCHAR" property="hotelName"/>
         <result column="hotel_info" jdbcType="VARCHAR" property="hotelInfo"/>
         <result column="hotel_content" jdbcType="VARCHAR" property="hotelContent"/>
-        <result column="hotel_site_id" jdbcType="VARCHAR" property="hotelSiteId"/>
+        <result column="hotel_city_id" jdbcType="VARCHAR" property="hotelCityId"/>
+    </resultMap>
+    <resultMap id="BaseResultMap2" type="com.obor.aircp.model.HHotelView">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="hotel_name" jdbcType="VARCHAR" property="hotelName"/>
+        <result column="hotel_info" jdbcType="VARCHAR" property="hotelInfo"/>
+        <result column="hotel_content" jdbcType="VARCHAR" property="hotelContent"/>
+        <result column="hotel_city_id" jdbcType="VARCHAR" property="hotelCityId"/>
+        <result column="b.service_money" jdbcType="VARCHAR" property="hotelMoney" />
     </resultMap>
     <sql id="Base_Column_List">
     id, hotel_name, hotel_info, hotel_content, hotel_city_id
+  </sql>
+    <sql id="Base_Column_List2">
+    hotel_name, hotel_info, hotel_content, hotel_city_id,b.service_money
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -27,17 +38,33 @@
         from h_hotel
         limit #{pstart,jdbcType=INTEGER},#{psize,jdbcType=INTEGER}
     </select>
+    <select id="selectByMoney" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT DISTINCT(h_hotel.id),
+        <include refid="Base_Column_List2"/>
+        FROM
+        h_hotel
+        left JOIN (select * from h_service where id in (select min(id) from h_service group by hotel_id) )
+        as b ON h_hotel.id = b.hotel_id
+        WHERE
+        <if test="minMoney != null">
+            <![CDATA[ b.service_money >= #{minMoney,jdbcType=INTEGER}]]>
+        </if>
+        <if test="maxMoney != null">
+            <![CDATA[ AND b.service_money <= #{maxMoney,jdbcType=INTEGER}]]>
+        </if>
+    </select>
     <select id="selectAll" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from h_hotel
     </select>
+
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.obor.aircp.model.HHotel"
             useGeneratedKeys="true">
     insert into h_hotel (id,hotel_name, hotel_info, hotel_content,
       hotel_site_id)
     values (#{id,jdbcType=VARCHAR},#{hotelName,jdbcType=VARCHAR}, #{hotelInfo,jdbcType=VARCHAR}, #{hotelContent,jdbcType=VARCHAR},
-      #{hotelSiteId,jdbcType=VARCHAR})
+      #{hotelCityId,jdbcType=VARCHAR})
   </insert>
     <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.obor.aircp.model.HHotel"
             useGeneratedKeys="true">
@@ -55,7 +82,7 @@
             <if test="hotelContent != null">
                 hotel_content,
             </if>
-            <if test="hotelSiteId != null">
+            <if test="hotelCityId != null">
                 hotel_site_id,
             </if>
         </trim>
@@ -72,8 +99,8 @@
             <if test="hotelContent != null">
                 #{hotelContent,jdbcType=VARCHAR},
             </if>
-            <if test="hotelSiteId != null">
-                #{hotelSiteId,jdbcType=VARCHAR},
+            <if test="hotelCityId != null">
+                #{hotelCityId,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -89,8 +116,8 @@
             <if test="hotelContent != null">
                 hotel_content = #{hotelContent,jdbcType=VARCHAR},
             </if>
-            <if test="hotelSiteId != null">
-                hotel_site_id = #{hotelSiteId,jdbcType=VARCHAR},
+            <if test="hotelCityId != null">
+                hotel_site_id = #{hotelCityId,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=VARCHAR}
@@ -100,7 +127,7 @@
     set hotel_name = #{hotelName,jdbcType=VARCHAR},
       hotel_info = #{hotelInfo,jdbcType=VARCHAR},
       hotel_content = #{hotelContent,jdbcType=VARCHAR},
-      hotel_site_id = #{hotelSiteId,jdbcType=VARCHAR}
+      hotel_site_id = #{hotelCityId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
     <select id="getCount" resultType="java.lang.Integer">

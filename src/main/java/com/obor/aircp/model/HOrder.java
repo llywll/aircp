@@ -1,5 +1,6 @@
 package com.obor.aircp.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -10,10 +11,6 @@ import java.util.Date;
  * @author 
  */
 public class HOrder implements Serializable {
-    enum OrderStatus
-    {
-        ongoing, notPaying, finish, backout
-    }
     /**
      * 订单编号
      */
@@ -55,7 +52,7 @@ public class HOrder implements Serializable {
     /**
      * 订单状态
      */
-    private OrderStatus orderStatus;
+    private String orderStatus;
 
     /**
      * 订单备注
@@ -104,6 +101,8 @@ public class HOrder implements Serializable {
         this.money = money;
     }
 
+
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     public Date getStartDate() {
         return startDate;
     }
@@ -112,6 +111,7 @@ public class HOrder implements Serializable {
         this.startDate = startDate;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     public Date getEndDate() {
         return endDate;
     }
@@ -120,11 +120,11 @@ public class HOrder implements Serializable {
         this.endDate = endDate;
     }
 
-    public OrderStatus getOrderStatus() {
+    public String getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(OrderStatus orderStatus) {
+    public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
     }
 

@@ -30,7 +30,7 @@ public class HHotel implements Serializable {
     /**
      * 酒店所在地
      */
-    private String hotelSiteId;
+    private String hotelCityId;
 
     private static final long serialVersionUID = 1L;
 
@@ -66,12 +66,12 @@ public class HHotel implements Serializable {
         this.hotelContent = hotelContent;
     }
 
-    public String getHotelSiteId() {
-        return hotelSiteId;
+    public String getHotelCityId() {
+        return hotelCityId;
     }
 
-    public void setHotelSiteId(String hotelSiteId) {
-        this.hotelSiteId = hotelSiteId;
+    public void setHotelCityId(String hotelCityId) {
+        this.hotelCityId = hotelCityId;
     }
 
     @Override
@@ -90,7 +90,7 @@ public class HHotel implements Serializable {
             && (this.getHotelName() == null ? other.getHotelName() == null : this.getHotelName().equals(other.getHotelName()))
             && (this.getHotelInfo() == null ? other.getHotelInfo() == null : this.getHotelInfo().equals(other.getHotelInfo()))
             && (this.getHotelContent() == null ? other.getHotelContent() == null : this.getHotelContent().equals(other.getHotelContent()))
-            && (this.getHotelSiteId() == null ? other.getHotelSiteId() == null : this.getHotelSiteId().equals(other.getHotelSiteId()));
+            && (this.getHotelCityId() == null ? other.getHotelCityId() == null : this.getHotelCityId().equals(other.getHotelCityId()));
     }
 
     @Override
@@ -101,7 +101,7 @@ public class HHotel implements Serializable {
         result = prime * result + ((getHotelName() == null) ? 0 : getHotelName().hashCode());
         result = prime * result + ((getHotelInfo() == null) ? 0 : getHotelInfo().hashCode());
         result = prime * result + ((getHotelContent() == null) ? 0 : getHotelContent().hashCode());
-        result = prime * result + ((getHotelSiteId() == null) ? 0 : getHotelSiteId().hashCode());
+        result = prime * result + ((getHotelCityId() == null) ? 0 : getHotelCityId().hashCode());
         return result;
     }
 
@@ -115,7 +115,7 @@ public class HHotel implements Serializable {
         sb.append(", hotelName=").append(hotelName);
         sb.append(", hotelInfo=").append(hotelInfo);
         sb.append(", hotelContent=").append(hotelContent);
-        sb.append(", hotelSiteId=").append(hotelSiteId);
+        sb.append(", hotelCityId=").append(hotelCityId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
