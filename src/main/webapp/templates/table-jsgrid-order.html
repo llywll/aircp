@@ -1,7 +1,4 @@
-​
-<script id="orderList" type="text/html">
-
-    <div class="main">
+​<div class="main">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-8 p-r-0 title-margin-right">
@@ -71,17 +68,18 @@
                     <th>订单备注</th>
                     <th>操作</th>
                 </tr>
-                <tr v-for="(index,item) in orderList" :key="index" :data-id="item.id">
-                    <li> {{item.id}}</li>
-                    <li> {{item.orderName}}</li>
-                    <li> {{item.userId }}</li>
-                    <li> {{item.id}}</li>
-                    <li> {{item.startDate}}</li>
-                    <li> {{item.endDate }}</li>
-                    <li> {{item.id }}</li>
-                    <li> {{item.money}}</li>
-                    <li> {{item.orderStatus}}</li>
-                    <li> {{item.orderComment}}</li>
+                <tr>
+                    {{#each data}}
+                    <li> {{data.id}}</li>
+                    <li> {{data.orderName}}</li>
+                    <li> {{data.userId }}</li>
+                    <li> {{data.id}}</li>
+                    <li> {{data.startDate}}</li>
+                    <li> {{data.endDate }}</li>
+                    <li> {{data.id }}</li>
+                    <li> {{data.money}}</li>
+                    <li> {{data.orderStatus}}</li>
+                    <li> {{data.orderComment}}</li>
                     <td>
                         <div class="btn-group">"
                             <button type="button" class="btn btn-info">详情</button>
@@ -89,6 +87,7 @@
                             <button type="button" class="btn btn-danger">审核</button>
                         </div>
                     </td>
+                    {{/each}}
                 </tr>
                 </thead>
             </table>
@@ -96,29 +95,3 @@
 
         </div>
     </div>
-
-</script>
-<script type="text/javascript">
-    let ordef = new Vue({
-        el: '#orderList',
-        data: {
-            orderList: []
-        },
-        mounted: {
-            init: function () {
-                $.ajax({
-                    url: "/order/getByPage",
-                    type: 'get',
-                    contentType: 'application/x-www-form-urlencoded',
-                    dataType: 'json',
-                    success: function (hdata) {
-                        this.orderList = hdata.data()
-                        console.log(this.orderList)
-                        //document.getElementsByClassName('.content-wrap')[0].innerHTML = template('orderList',hdata.data)
-                    }
-                })
-            }
-        }
-    })
-    console.log(ordef)
-</script>

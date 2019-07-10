@@ -34,13 +34,46 @@
         $('.content-wrap').load('/templates/table-jsgrid-user.html')
     })
     $("#place_o").on('click', function () {
-        $('.content-wrap').load('/templates/table-jsgrid-order.html')
+        $.ajax({
+            url: "/order/getByPage",
+            type: 'get',
+            contentType: 'application/x-www-form-urlencoded',
+            dataType: 'json',
+            success: function (hdata) {
+                let oTemp = Handlebars.compile($('#orderTemp').html())
+                let orderList = {
+                    sdata: hdata.data
+                }
+                let html = oTemp(orderList);
+                console.log(hdata.data)
+                $('.content-wrap').html(html)
+            }
+        })
 
     })
     $("#place_h").on('click', function () {
         $('.content-wrap').load('/templates/table-jsgrid-ho.html')
     })
 
+    $(".showInfoBtn").on("click",
+        function (id) {
+            let oId = $(this).data("id")
+            $.ajax({
+                url: "/order/getById?id=" + idd,
+                type: 'get',
+                contentType: 'application/x-www-form-urlencoded',
+                dataType: 'json',
+                success: function (hdata) {
+                    let oTemp = Handlebars.compile($('#infoModalTemp').html())
+                    let orderList = {
+                        sdata: hdata.data
+                    }
+                    let html = oTemp(orderList);
+                    $('.modal_Box').html(html)
+                    $('#infoModal').modal('toggle')
+                }
+            })
+        })
 
     /* TO DO LIST
     --------------------*/
@@ -56,8 +89,7 @@
                 $(this).val("");
             }
         }
-    });
-
+    })
 
     $(".tdl-content a").on("click", function () {
         var _li = $(this).parent().parent("li");
