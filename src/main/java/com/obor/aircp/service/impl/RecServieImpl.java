@@ -29,5 +29,9 @@ public class RecServieImpl implements RecService {
         return hRecMapper.insert(hrec);
     }
 
+    @Override
+    public int updaterec(HRec hRec){
+        return hRecMapper.updateByPrimaryKey(hRec);
+    }
 
 }

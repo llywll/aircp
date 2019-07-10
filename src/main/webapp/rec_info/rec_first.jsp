@@ -57,13 +57,23 @@
 
 <br><br><input type="button" value="刷新景点列表" onclick="citylist()"  /><input type="button" value="新增" onclick="addrec()"  /><br>
 <!--查询城市景点-->
-<c:forEach items="${reclist }" var="reclista">
-    <c:out value="${reclista.id }"  />
-    <c:out value="${reclista.cityRecName }" />
-    <c:out value="${reclista.cityRecContext }" />
-    <c:out value="${reclista.cityComment }" />
-    <a href="/rec_info/rec_add.jsp?rec_id=${reclista.id }&rec_name=${reclista.cityRecName }&rec_context=${reclista.cityRecContext }&rec_comment=${reclista.cityComment }" >修改</a>
-    <a href="/deleterec?recid=${reclista.id }" >删除</a>
+<table width="90%" id="mytab" border="1" class="style1">
+    <thead>
+    <th width="10%">ID</th>
+    <th width="8%">景点名称</th>
+    <th width="25%">景点介绍</th>
+    <th width="25%">热点评论</th>
+    <th width="15%">操作</th>
+    </thead>
+    <c:forEach items="${reclist }" var="reclista">
+    <tr>
+        <td><c:out value="${reclista.id }"  /></td>
+        <td><c:out value="${reclista.cityRecName }" /></td>
+        <td><c:out value="${reclista.cityRecContext }" /></td>
+        <td><c:out value="${reclista.cityComment }" /></td>
+        <td><a href="/rec_info/rec_add.jsp?rec_id=${reclista.id }&rec_name=${reclista.cityRecName }&rec_context=${reclista.cityRecContext }&rec_comment=${reclista.cityComment }" >修改</a>
+        <a href="/deleterec?recid=${reclista.id }" >删除</a></td>
+    </tr>
 </c:forEach>
 
 

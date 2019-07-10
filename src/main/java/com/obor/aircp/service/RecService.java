@@ -10,4 +10,6 @@ public interface RecService {
     int delrec(String recid);
 
     int addrec(HRec hrec);
+
+    int updaterec(HRec hRec);
 }

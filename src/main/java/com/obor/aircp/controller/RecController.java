@@ -66,9 +66,21 @@ public class RecController {
         hRec.setCityComment(request.getParameter("rec_comment"));
         System.out.println(hRec);
         recService.addrec(hRec);
-        return "redirect:/reclistbycity";
+        return "redirect:/getallcity";
     }
-    //删除Rec
+    //增加rec
+    @RequestMapping("/updaterec")
+    public String updaterec(HRec hRec,HttpServletRequest request){
+        hRec.setId(request.getParameter("rec_id"));
+        hRec.setCityRecName(request.getParameter("rec_name"));
+        hRec.setCityRecContext(request.getParameter("rec_context"));
+        hRec.setCityComment(request.getParameter("rec_comment"));
+        System.out.println(hRec);
+        recService.addrec(hRec);
+        return "redirect:/getallcity";
+    }
+
+        //删除Rec
     @RequestMapping("/deleterec")
     public String delrec(HttpServletRequest an){
         String recid=an.getParameter("recid");
