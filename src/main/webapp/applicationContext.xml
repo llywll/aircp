@@ -72,8 +72,16 @@
 
 <bean id="hCtiyMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
     <property name="mapperInterface" value="com.obor.aircp.mapper.HCityMapper"/>
-    <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+    <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 </bean>
 <bean id="hCityService"  class="com.obor.aircp.service.impl.CityServiceImpl"/>
+
+
+    <bean id="hRecMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.obor.aircp.mapper.HRecMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="hRecService" class="com.obor.aircp.service.impl.RecServieImpl"/>
+
 
 </beans>
